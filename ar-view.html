@@ -1,107 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Model Viewer with Surface Detection</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AR Model Viewer with Surface Detection</title>
  
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-        /* Стили для model-viewer */
-        model-viewer {
-            width: 100%;
-            height: 100vh;
-            background-color: transparent; /* Прозрачный фон */
-        }
+	<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+	<style>
+		/* Стили для model-viewer */
+		model-viewer {
+			width: 100%;
+			height: 100vh;
+			background-color: transparent; /* Прозрачный фон */
+		}
 
-        /* Стили для загрузки */
-        .ar-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #007bff;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 10px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+		/* Стили для кнопки AR */
+		.ar-button {
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 
-    <!-- Загрузка AR -->
-    <div id="ar-loading" class="ar-loading">
-        <div class="loading-spinner"></div>
-        <p>Инициализация AR...</p>
-    </div>
+	<model-viewer 
+		id="modelViewer"
+		src="prised2.glb" 
+		ios-src="path/to/your-model.usdz" 
+		ar 
+		ar-modes="webxr scene-viewer quick-look" 
+		camera-controls 
+		auto-rotate 
+		shadow-intensity="1"
+		xr-environment 
+		ar-placement="floor" 
+		ar-scale="auto" 
+		animation-name="" 
+		autoplay="">
+	</model-viewer>
 
-    <!-- Model Viewer -->
-    <model-viewer 
-        id="modelViewer"
-        src="prised2.glb" 
-        ios-src="path/to/your-model.usdz" 
-        ar 
-        ar-modes="webxr scene-viewer quick-look" 
-        camera-controls 
-        auto-rotate 
-        shadow-intensity="1"
-        xr-environment 
-        ar-placement="floor" 
-        ar-scale="auto" 
-        animation-name="" 
-        autoplay="">
-    </model-viewer>
+	<button id="arButton" class="ar-button">
+		Включить AR
+	</button>
 
-    <script>
-        // Получаем элементы
-        const modelViewer = document.getElementById('modelViewer');
-        const arLoading = document.getElementById('ar-loading');
+	<script>
+		// Получаем элемент model-viewer
+		const modelViewer = document.getElementById('modelViewer');
+		const arButton = document.getElementById('arButton');
 
-        // Функция для активации AR с задержкой
-        function activateARWithDelay() {
-            modelViewer.activateAR().catch((error) => {
-                console.error('Ошибка при активации AR:', error);
-                alert('Не удалось активировать AR.');
-            });
+		// Проверяем поддержку AR
+		if (modelViewer.canActivateAR) {
+			console.log('AR поддерживается на этом устройстве.');
+		} else {
+			console.warn('AR не поддерживается на этом устройстве.');
+		}
 
-            // Задержка перед повторным размещением модели
-            setTimeout(() => {
-                try {
-                    modelViewer.jumpToPosition(); // Перемещает модель на новую поверхность
-                    console.log('Модель перемещена на новую поверхность.');
-                } catch (error) {
-                    console.error('Ошибка при перемещении модели:', error);
-                }
-            }, 2000); // Задержка 2 секунды
-        }
+		// Активация AR при нажатии на кнопку
+		arButton.addEventListener('click', () => {
+			if (modelViewer.canActivateAR) {
+				activateARWithDelay();
+			} else {
+				alert('AR не поддерживается на этом устройстве.');
+			}
+		});
 
-        // Инициализация после загрузки страницы
-        window.addEventListener('load', () => {
-            if (modelViewer.canActivateAR) {
-                console.log('AR поддерживается на этом устройстве.');
-                setTimeout(() => {
-                    arLoading.style.display = 'none'; // Скрываем загрузку
-                    activateARWithDelay(); // Автоматически активируем AR
-                }, 2000); // Имитация задержки загрузки
-            } else {
-                console.warn('AR не поддерживается на этом устройстве.');
-                arLoading.innerHTML = '<p>AR не поддерживается на вашем устройстве.</p>';
-            }
-        });
-    </script>
+		// Функция для активации AR с задержкой
+		function activateARWithDelay() {
+			modelViewer.activateAR().catch((error) => {
+				console.error('Ошибка при активации AR:', error);
+			});
+
+			// Задержка перед повторным размещением модели
+			setTimeout(() => {
+				try {
+					modelViewer.jumpToPosition(); // Перемещает модель на новую поверхность
+					console.log('Модель перемещена на новую поверхность.');
+				} catch (error) {
+					console.error('Ошибка при перемещении модели:', error);
+				}
+			}, 2000); // Задержка 2 секунды
+		}
+
+		// Автоматическая активация AR при загрузке страницы (опционально)
+		window.addEventListener('load', () => {
+			if (modelViewer.canActivateAR) {
+				activateARWithDelay();
+			}
+		});
+	</script>
 </body>
 </html>
