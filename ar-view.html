@@ -1,100 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>AR Model Viewer with Surface Detection</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Model Viewer with Surface Detection</title>
  
-	<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-	<style>
-		/* Стили для model-viewer */
-		model-viewer {
-			width: 100%;
-			height: 100vh;
-			background-color: transparent; /* Прозрачный фон */
-		}
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        /* Стили для model-viewer */
+        model-viewer {
+            width: 100%;
+            height: 100vh;
+            background-color: transparent; /* Прозрачный фон */
+        }
 
-		/* Стили для кнопки AR */
-		.ar-button {
-			position: absolute;
-			bottom: 20px;
-			left: 50%;
-			transform: translateX(-50%);
-			padding: 10px 20px;
-			background-color: #007bff;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-	</style>
+        /* Стили для кнопки AR */
+        .ar-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 50px; /* Круглые края */
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Тень */
+            transition: all 0.3s ease; /* Плавные переходы */
+            outline: none; /* Убираем контур при фокусе */
+            z-index: 10; /* Чтобы кнопка была поверх других элементов */
+        }
+
+        /* Анимация при наведении */
+        .ar-button:hover {
+            background-color: #0056b3; /* Темнее при наведении */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Усиливаем тень */
+        }
+
+        /* Анимация при нажатии */
+        .ar-button:active {
+            transform: translate(-50%, -2px); /* Легкое смещение вверх */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Уменьшаем тень */
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 600px) {
+            .ar-button {
+                font-size: 14px;
+                padding: 12px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-	<model-viewer 
-		id="modelViewer"
-		src="prised2.glb" 
-		ios-src="path/to/your-model.usdz" 
-		ar 
-		ar-modes="webxr scene-viewer quick-look" 
-		camera-controls 
-		auto-rotate 
-		shadow-intensity="1"
-		xr-environment 
-		ar-placement="floor" 
-		ar-scale="auto" 
-		animation-name="" 
-		autoplay="">
-	</model-viewer>
+    <model-viewer 
+        id="modelViewer"
+        src="prised2.glb" 
+        ios-src="path/to/your-model.usdz" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="1"
+        xr-environment 
+        ar-placement="floor" 
+        ar-scale="auto" 
+        animation-name="" 
+        autoplay="">
+    </model-viewer>
 
-	<button id="arButton" class="ar-button">
-		Включить AR
-	</button>
+    <button id="arButton" class="ar-button">
+        Включить AR
+    </button>
 
-	<script>
-		// Получаем элемент model-viewer
-		const modelViewer = document.getElementById('modelViewer');
-		const arButton = document.getElementById('arButton');
+    <script>
+        // Получаем элемент model-viewer
+        const modelViewer = document.getElementById('modelViewer');
+        const arButton = document.getElementById('arButton');
 
-		// Проверяем поддержку AR
-		if (modelViewer.canActivateAR) {
-			console.log('AR поддерживается на этом устройстве.');
-		} else {
-			console.warn('AR не поддерживается на этом устройстве.');
-		}
+        // Проверяем поддержку AR
+        if (modelViewer.canActivateAR) {
+            console.log('AR поддерживается на этом устройстве.');
+        } else {
+            console.warn('AR не поддерживается на этом устройстве.');
+        }
 
-		// Активация AR при нажатии на кнопку
-		arButton.addEventListener('click', () => {
-			if (modelViewer.canActivateAR) {
-				activateARWithDelay();
-			} else {
-				alert('AR не поддерживается на этом устройстве.');
-			}
-		});
+        // Активация AR при нажатии на кнопку
+        arButton.addEventListener('click', () => {
+            if (modelViewer.canActivateAR) {
+                activateARWithDelay();
+            } else {
+                alert('AR не поддерживается на этом устройстве.');
+            }
+        });
 
-		// Функция для активации AR с задержкой
-		function activateARWithDelay() {
-			modelViewer.activateAR().catch((error) => {
-				console.error('Ошибка при активации AR:', error);
-			});
+        // Функция для активации AR с задержкой
+        function activateARWithDelay() {
+            modelViewer.activateAR().catch((error) => {
+                console.error('Ошибка при активации AR:', error);
+            });
 
-			// Задержка перед повторным размещением модели
-			setTimeout(() => {
-				try {
-					modelViewer.jumpToPosition(); // Перемещает модель на новую поверхность
-					console.log('Модель перемещена на новую поверхность.');
-				} catch (error) {
-					console.error('Ошибка при перемещении модели:', error);
-				}
-			}, 2000); // Задержка 2 секунды
-		}
+            // Задержка перед повторным размещением модели
+            setTimeout(() => {
+                try {
+                    modelViewer.jumpToPosition(); // Перемещает модель на новую поверхность
+                    console.log('Модель перемещена на новую поверхность.');
+                } catch (error) {
+                    console.error('Ошибка при перемещении модели:', error);
+                }
+            }, 2000); // Задержка 2 секунды
+        }
 
-		// Автоматическая активация AR при загрузке страницы (опционально)
-		window.addEventListener('load', () => {
-			if (modelViewer.canActivateAR) {
-				activateARWithDelay();
-			}
-		});
-	</script>
+        // Автоматическая активация AR при загрузке страницы (опционально)
+        window.addEventListener('load', () => {
+            if (modelViewer.canActivateAR) {
+                activateARWithDelay();
+            }
+        });
+    </script>
 </body>
 </html>
