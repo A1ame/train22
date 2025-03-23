@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness AR</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <div class="header-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </div>
+        <h1 class="header-title">Fitness AR</h1>
+      </div>
+      <button class="header-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="home-container">
+      <div class="intro-section">
+        <div class="intro-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        </div>
+        <h1 class="intro-title">Выберите категорию</h1>
+        <p class="intro-description">Просматривайте упражнения и используйте AR для визуализации правильной техники</p>
+      </div>
+      
+      <div class="categories-grid">
+        <a href="category-strength.html" class="category-card">
+          <div class="category-image-container">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop" alt="Силовые тренировки" class="category-image">
+            <div class="image-overlay"></div>
+            <span class="category-name">Силовые тренировки</span>
+          </div>
+          <p class="category-description">Упражнения для развития силы и мышечной массы</p>
+          <div class="category-footer">
+            <span class="exercises-count">12 упражнений</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+        </a>
+
+        <a href="category-cardio.html" class="category-card">
+          <div class="category-image-container">
+            <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?q=80&w=1974&auto=format&fit=crop" alt="Кардио тренировки" class="category-image">
+            <div class="image-overlay"></div>
+            <span class="category-name">Кардио тренировки</span>
+          </div>
+          <p class="category-description">Упражнения для улучшения выносливости и сжигания калорий</p>
+          <div class="category-footer">
+            <span class="exercises-count">8 упражнений</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+        </a>
+
+        <a href="category-flexibility.html" class="category-card">
+          <div class="category-image-container">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2020&auto=format&fit=crop" alt="Растяжка" class="category-image">
+            <div class="image-overlay"></div>
+            <span class="category-name">Растяжка</span>
+          </div>
+          <p class="category-description">Упражнения для улучшения гибкости и подвижности</p>
+          <div class="category-footer">
+            <span class="exercises-count">6 упражнений</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

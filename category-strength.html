@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Силовые тренировки - Fitness AR</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <a href="index.html" class="back-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span>Назад</span>
+        </a>
+        <h1 class="header-title">Силовые тренировки</h1>
+      </div>
+      <button class="header-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="category-container">
+      <div class="category-intro">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h2M5 21h4M18 18h2M17 21h4M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6v0ZM7 15h2v0a5 5 0 1 0 10 0v0h-2"/></svg>
+        </div>
+        <h1 class="category-title">Силовые тренировки</h1>
+        <p class="category-description">Упражнения для развития силы и мышечной массы с использованием собственного веса и дополнительного оборудования</p>
+      </div>
+      
+      <div class="exercises-list">
+        <div class="exercise-card">
+          <div class="exercise-info">
+            <h3 class="exercise-name">Отжимания</h3>
+            <p class="exercise-description">Классическое упражнение для развития грудных мышц, трицепсов и плеч</p>
+            <div class="exercise-tags">
+              <span class="exercise-duration">3 подхода по 15 раз</span>
+              <span class="exercise-difficulty beginner">Начальный</span>
+            </div>
+          </div>
+          <a href="ar-view.html?exercise=pushups" class="ar-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"></circle><path d="M13 5.05A7 7 0 0 1 17 19a7 7 0 0 1-10-11.95M9 9h.01"></path></svg>
+            <span>AR</span>
+          </a>
+        </div>
+
+        <div class="exercise-card">
+          <div class="exercise-info">
+            <h3 class="exercise-name">Приседания</h3>
+            <p class="exercise-description">Базовое упражнение для развития мышц ног и ягодиц</p>
+            <div class="exercise-tags">
+              <span class="exercise-duration">4 подхода по 20 раз</span>
+              <span class="exercise-difficulty beginner">Начальный</span>
+            </div>
+          </div>
+          <a href="ar-view.html?exercise=squats" class="ar-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"></circle><path d="M13 5.05A7 7 0 0 1 17 19a7 7 0 0 1-10-11.95M9 9h.01"></path></svg>
+            <span>AR</span>
+          </a>
+        </div>
+
+        <div class="exercise-card">
+          <div class="exercise-info">
+            <h3 class="exercise-name">Подтягивания</h3>
+            <p class="exercise-description">Эффективное упражнение для развития мышц спины и бицепсов</p>
+            <div class="exercise-tags">
+              <span class="exercise-duration">3 подхода по 8-12 раз</span>
+              <span class="exercise-difficulty intermediate">Средний</span>
+            </div>
+          </div>
+          <a href="ar-view.html?exercise=pullups" class="ar-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"></circle><path d="M13 5.05A7 7 0 0 1 17 19a7 7 0 0 1-10-11.95M9 9h.01"></path></svg>
+            <span>AR</span>
+          </a>
+        </div>
+
+        <div class="exercise-card">
+          <div class="exercise-info">
+            <h3 class="exercise-name">Жим гантелей</h3>
+            <p class="exercise-description">Упражнение для развития грудных мышц и трицепсов с использованием гантелей</p>
+            <div class="exercise-tags">
+              <span class="exercise-duration">4 подхода по 10-12 раз</span>
+              <span class="exercise-difficulty intermediate">Средний</span>
+            </div>
+          </div>
+          <a href="ar-view.html?exercise=dumbbell-press" class="ar-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"></circle><path d="M13 5.05A7 7 0 0 1 17 19a7 7 0 0 1-10-11.95M9 9h.01"></path></svg>
+            <span>AR</span>
+          </a>
+        </div>
+
+        <div class="exercise-card">
+          <div class="exercise-info">
+            <h3 class="exercise-name">Становая тяга</h3>
+            <p class="exercise-description">Комплексное упражнение для развития мышц спины, ног и кора</p>
+            <div class="exercise-tags">
+              <span class="exercise-duration">3 подхода по 8-10 раз</span>
+              <span class="exercise-difficulty advanced">Продвинутый</span>
+            </div>
+          </div>
+          <a href="ar-view.html?exercise=deadlift" class="ar-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"></circle><path d="M13 5.05A7 7 0 0 1 17 19a7 7 0 0 1-10-11.95M9 9h.01"></path></svg>
+            <span>AR</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
