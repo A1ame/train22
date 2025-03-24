@@ -1,5 +1,5 @@
 // URL публичного JSON-файла
-const USERS_JSON_URL = 'https://example.com/users.json'; // Замени на реальную ссылку
+const USERS_JSON_URL = 'https://raw.githubusercontent.com/A1ame/train22/main/users.json'; // Замени на реальную ссылку
 
 // Загрузка пользователей из публичного JSON
 async function loadUsersFromJson() {
