@@ -88,36 +88,73 @@ body {
 
 /* Стили для выбора пола (десктопная версия) */
 /* Стили для блока выбора пола */
+/* Стили для блока выбора пола */
 .gender-options {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
 }
 
-.gender-card {
+/* Маленькие изображения */
+.small-images {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.gender-card.small {
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  width: 100px; /* Маленький размер */
+  height: 100px;
 }
 
-.gender-card:hover {
-  transform: scale(1.1);
-}
-
-.gender-image {
-  width: 150px;
-  height: 150px;
+.gender-card.small .gender-image {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.gender-card span {
+.gender-card.small span {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Большие изображения */
+.large-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gender-card.large {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  width: 300px; /* Большой размер */
+  height: 300px;
+}
+
+.gender-card.large .gender-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.gender-card.large span {
   display: block;
   margin-top: 10px;
   font-weight: bold;
+  font-size: 18px;
 }
 
-/* Стили для плавного перехода */
+/* Активное и неактивное состояние */
 .gender-card.active {
   opacity: 1;
   transform: scale(1.1);
@@ -128,34 +165,6 @@ body {
   opacity: 0.5;
   transform: scale(1);
   z-index: 0;
-}
-
-.gender-button {
-  width: 80%;
-  max-width: 300px;
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: var(--radius);
-  font-size: 1.25rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin: 1rem 0;
-}
-
-.gender-button:hover {
-  background-color: var(--primary-hover);
-}
-
-/* Скрываем скроллбар, но сохраняем прокрутку */
-.gender-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.gender-slider {
-  -ms-overflow-style: none; /* IE и Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
 /* Это может скрывать изображения на экранах больше 768px */
