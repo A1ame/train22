@@ -1,5 +1,7 @@
 // URL публичного JSON-файла
-const USERS_JSON_URL = 'https://raw.githubusercontent.com/A1ame/train22/main/users.json'; // Замени на реальную ссылку
+const USERS_JSON_URL = 'https://raw.githubusercontent.com/A1ame/train22/main/users.json';
+const GITHUB_API_URL = 'https://api.github.com/repos/A1ame/train22/contents/users.json';
+const GITHUB_TOKEN = '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'; // Замени на свой токен
 
 // Загрузка пользователей из публичного JSON
 async function loadUsersFromJson() {
@@ -10,6 +12,44 @@ async function loadUsersFromJson() {
   } catch (error) {
     console.error(error);
     return { users: [] };
+  }
+}
+
+// Обновление users.json через GitHub API
+async function updateUsersJson(newUser) {
+  const usersData = await loadUsersFromJson();
+  usersData.users.push(newUser);
+
+  // Получаем текущий SHA файла
+  const getResponse = await fetch(GITHUB_API_URL, {
+    headers: {
+      'Authorization': `token ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  });
+  const fileData = await getResponse.json();
+  const sha = fileData.sha;
+
+  // Обновляем файл
+  const updateResponse = await fetch(GITHUB_API_URL, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json'
+    },
+    body: JSON.stringify({
+      message: `Add new user: ${newUser.username}`,
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(usersData, null, 2)))),
+      sha: sha
+    })
+  });
+
+  if (updateResponse.ok) {
+    console.log('users.json успешно обновлен');
+    return true;
+  } else {
+    console.error('Ошибка при обновлении users.json:', await updateResponse.json());
+    return false;
   }
 }
 
@@ -25,7 +65,6 @@ if (window.location.pathname.includes('index.html') && !checkAuth()) {
 
 // Логика для всех страниц
 document.addEventListener('DOMContentLoaded', async function() {
-  // Логика для login.html
   const loginFormContainer = document.getElementById('login-form-container');
   const genderSelection = document.getElementById('gender-selection');
   const registerFormContainer = document.getElementById('register-form-container');
@@ -36,13 +75,11 @@ document.addEventListener('DOMContentLoaded', async function() {
   let selectedGender = null;
 
   if (loginFormContainer && genderSelection && registerFormContainer) {
-    // Переход к регистрации
     toRegisterButton.addEventListener('click', function() {
       loginFormContainer.style.display = 'none';
       genderSelection.style.display = 'block';
     });
 
-    // Выбор пола
     document.querySelectorAll('.gender-card').forEach(card => {
       card.addEventListener('click', function() {
         selectedGender = this.dataset.gender;
@@ -51,7 +88,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       });
     });
 
-    // Вход
     loginForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       const username = document.getElementById('login-username').value;
@@ -68,7 +104,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
     });
 
-    // Регистрация
     registerForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       const username = document.getElementById('register-username').value;
@@ -87,19 +122,25 @@ document.addEventListener('DOMContentLoaded', async function() {
         gender: selectedGender,
         joinDate: new Date().toISOString().split('T')[0]
       };
+
+      // Сохраняем локально и пытаемся обновить на GitHub
       localStorage.setItem('currentUser', JSON.stringify(newUser));
-      alert('Регистрация успешна! Данные сохранены локально. Для синхронизации добавьте пользователя в users.json вручную.');
+      const updated = await updateUsersJson(newUser);
+
+      if (updated) {
+        alert('Регистрация успешна! Данные сохранены в users.json.');
+      } else {
+        alert('Регистрация успешна локально, но не удалось обновить users.json. Добавьте пользователя вручную.');
+      }
       window.location.href = 'index.html';
     });
 
-    // Возврат к форме входа
     backToLoginButton.addEventListener('click', function() {
       registerFormContainer.style.display = 'none';
       loginFormContainer.style.display = 'block';
     });
   }
 
-  // Логика для profile.html
   const profileUsername = document.getElementById('profile-username');
   const profileGender = document.getElementById('profile-gender');
   const profileJoinDate = document.getElementById('profile-join-date');
@@ -122,7 +163,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
   }
 
-  // Существующая логика для анимаций и AR
   const homeContainer = document.querySelector('.home-container');
   const categoryContainer = document.querySelector('.category-container');
   
@@ -137,7 +177,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   setupARView();
 });
 
-// Существующая функция setupARView (без изменений)
 function setupARView() {
   const arInactive = document.getElementById('ar-inactive');
   const arActive = document.getElementById('ar-active');
@@ -180,7 +219,6 @@ function setupARView() {
   }
 }
 
-// Данные упражнений (без изменений)
 const exercisesData = {
   'pushups': { name: 'Отжимания', description: 'Классическое упражнение для развития грудных мышц, трицепсов и плеч', difficulty: 'beginner', duration: '3 подхода по 15 раз', demoImage: 'https://images.unsplash.com/photo-1616803689943-5601631c7fec?q=80&w=1770&auto=format&fit=crop' },
   'squats': { name: 'Приседания', description: 'Базовое упражнение для развития мышц ног и ягодиц', difficulty: 'beginner', duration: '4 подхода по 20 раз', demoImage: 'https://images.unsplash.com/photo-1603287681836-b174ce5074c2?q=80&w=1770&auto=format&fit=crop' },
