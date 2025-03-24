@@ -87,63 +87,47 @@ body {
 }
 
 /* Стили для выбора пола (десктопная версия) */
+/* Стили для блока выбора пола */
 .gender-options {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 .gender-card {
+  text-align: center;
   cursor: pointer;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .gender-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .gender-image {
-  width: 200px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
 .gender-card span {
   display: block;
-  padding: 0.5rem;
-  font-weight: 500;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
-/* Стили для слайдера (мобильная версия) */
-.gender-slider {
-  position: relative;
-  width: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  display: flex;
-  gap: 0;
-  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+/* Стили для плавного перехода */
+.gender-card.active {
+  opacity: 1;
+  transform: scale(1.1);
+  z-index: 1;
 }
 
-.gender-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; /* На весь экран */
-  background-color: var(--card-bg);
-}
-
-.gender-slide img {
-  width: 100%;
-  height: calc(100vh - 150px); /* Высота с учетом кнопки и заголовка */
-  object-fit: cover;
+.gender-card.inactive {
+  opacity: 0.5;
+  transform: scale(1);
+  z-index: 0;
 }
 
 .gender-button {
@@ -173,52 +157,6 @@ body {
   -ms-overflow-style: none; /* IE и Edge */
   scrollbar-width: none; /* Firefox */
 }
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  .login-container {
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-  }
-
-  .login-title {
-    font-size: 1.5rem;
-    padding: 1rem 0;
-  }
-
-  .form-group input {
-    font-size: 0.9rem;
-  }
-
-  .auth-button {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-
-  /* Скрываем десктопную версию выбора пола */
-  .gender-options {
-    display: none;
-  }
-
-  /* Показываем слайдер только на мобильных */
-  .gender-slider {
-    display: flex;
-  }
-}
-
-@media (min-width: 769px) {
-  /* Скрываем слайдер на десктопе */
-  .gender-slider {
-    display: none;
-  }
-
-  /* Показываем десктопную версию выбора пола */
-  .gender-options {
-    display: flex;
-  }
-}
-
 
 
 
