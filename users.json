@@ -1,0 +1,10 @@
+{
+    "users": [
+      {
+        "username": "user1",
+        "password": "pass123",
+        "gender": "male",
+        "joinDate": "2025-03-24"
+      }
+    ]
+  }

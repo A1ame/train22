@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход - Fitness AR</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="page-container">
+    <!-- Форма входа (показывается по умолчанию) -->
+    <div class="login-container" id="login-form-container">
+      <h1 class="login-title">Вход</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Логин</label>
+          <input type="text" id="login-username" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Пароль</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <button type="submit" class="auth-button">Войти</button>
+        <button type="button" id="to-register-button" class="auth-button secondary">Зарегистрироваться</button>
+      </form>
+    </div>
+
+    <!-- Выбор пола (скрыт по умолчанию) -->
+    <div class="login-container" id="gender-selection" style="display: none;">
+      <h1 class="login-title">Выберите пол</h1>
+      <div class="gender-options">
+        <div class="gender-card" data-gender="male">
+          <img src="man.png" alt="Мужчина" class="gender-image">
+          <span>Мужчина</span>
+        </div>
+        <div class="gender-card" data-gender="female">
+          <img src="woman.png" alt="Женщина" class="gender-image">
+          <span>Женщина</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Форма регистрации (скрыта по умолчанию) -->
+    <div class="login-container" id="register-form-container" style="display: none;">
+      <h1 class="login-title">Регистрация</h1>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="register-username">Логин</label>
+          <input type="text" id="register-username" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Пароль</label>
+          <input type="password" id="register-password" required>
+        </div>
+        <button type="submit" class="auth-button">Зарегистрироваться</button>
+        <button type="button" id="back-to-login-button" class="auth-button secondary">Назад</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
