@@ -219,6 +219,38 @@ function setupARView() {
   }
 }
 
+// Получаем все элементы .gender-card
+const genderCards = document.querySelectorAll('.gender-card');
+
+// Функция для обработки выбора пола
+function handleGenderSelection() {
+  // Удаляем класс active и inactive у всех карточек
+  genderCards.forEach(card => {
+    card.classList.remove('active', 'inactive');
+  });
+
+  // Добавляем класс active к выбранной карточке
+  this.classList.add('active');
+
+  // Добавляем класс inactive к другой карточке
+  const otherCard = this.dataset.gender === 'male' ? genderCards[1] : genderCards[0];
+  otherCard.classList.add('inactive');
+
+  // Сохраняем выбранный пол
+  selectedGender = this.dataset.gender;
+
+  // После выбора пола показываем форму регистрации
+  setTimeout(() => {
+    genderSelection.style.display = 'none';
+    registerFormContainer.style.display = 'block';
+  }, 500); // Ожидание завершения анимации
+}
+
+// Добавляем слушатели событий на каждую карточку
+genderCards.forEach(card => {
+  card.addEventListener('click', handleGenderSelection);
+});
+
 const exercisesData = {
   'pushups': { name: 'Отжимания', description: 'Классическое упражнение для развития грудных мышц, трицепсов и плеч', difficulty: 'beginner', duration: '3 подхода по 15 раз', demoImage: 'https://images.unsplash.com/photo-1616803689943-5601631c7fec?q=80&w=1770&auto=format&fit=crop' },
   'squats': { name: 'Приседания', description: 'Базовое упражнение для развития мышц ног и ягодиц', difficulty: 'beginner', duration: '4 подхода по 20 раз', demoImage: 'https://images.unsplash.com/photo-1603287681836-b174ce5074c2?q=80&w=1770&auto=format&fit=crop' },
