@@ -158,6 +158,13 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
+/* Это может скрывать изображения на экранах больше 768px */
+@media (min-width: 768px) {
+  .gender-image {
+    display: none;
+  }
+}
+
 
 
 
